@@ -15,9 +15,16 @@ namespace WriteToFile
             string NewUsername;
             string NewPassword;
             string NewName;
-            // string File = "Data.txt";
 
-            // Console.WriteLine("Testing. Does this work?");
+            string Username;
+            string Password;
+
+            string UsernameFile = "Usernames.txt";
+            string PasswordsFile = "Passwords.txt";
+            string NamesFile = "Names.txt";
+
+            bool HasUsername = false;
+            bool HasPassword = false;
 
             //START THE MESSAGE
             Console.WriteLine("Welcome to Login Manager!");
@@ -34,56 +41,74 @@ namespace WriteToFile
             }
             if (Answer == "Y")
             {
-                Console.WriteLine("You have logged in!");
+                // Console.WriteLine("You have logged in!");
+                //string[] lines = File.ReadAllLines("Data.txt");
+                // for(int i = 0; i < lines.Length; i++)
+                // {
+                //     Console.WriteLine(lines[i]);
+                // }
+
+                Console.WriteLine("Please input your username:");
+                Username = Console.ReadLine();
+                
+                Console.WriteLine("Please input your password:");
+                Password = Console.ReadLine();
+
+                string[] UsernameArray = File.ReadAllLines(UsernameFile);
+
+                for (int i = 0; i < UsernameArray.Length; i++)
+                {
+                    string line = UsernameArray[i];
+                    if (Username == line)
+                    {
+                        Console.WriteLine("You have a username entry!");
+                        HasUsername = true;
+                    }
+                }
+
+                if (HasUsername == true)
+                {
+                    Console.WriteLine("You are now logged in! (No password yet.)");
+                }else
+                {
+                    Console.WriteLine("You either do not have an account yet or you didn't put in your username correctly.");
+                }
+
 
 
 
             }else if (Answer == "N")
             {
-                //Console.WriteLine("You have created a new account!");
                 Console.WriteLine("-------------------------------");
                 Console.WriteLine("Welcome to the account setup wizard!");
 
                 Console.WriteLine("Please input your new username: ");
                 NewUsername = Console.ReadLine();
-                // await File.WriteAllTextAsync("WriteText.txt", NewUsername);
-                MyAsync(NewUsername);
+                MyAsync(NewUsername, UsernameFile);
                 
 
                 Console.WriteLine("Please input your new password: ");
                 NewPassword = Console.ReadLine();
-                //await File.WriteAllTextAsync("WriteText.txt", NewPassword);
-                MyAsync(NewPassword);
+                MyAsync(NewPassword, PasswordsFile);
 
                 Console.WriteLine("Please input your name: ");
                 NewName = Console.ReadLine();
-                //await File.WriteAllTextAsync("WriteText.txt", NewName);
-                MyAsync(NewName);
+                MyAsync(NewName, NamesFile);
                 
             }
 
      
 
-
+            Console.WriteLine("Press Enter to continue...");
             Console.ReadKey();
 
             
         }
 
-
-        // public static async Task MyAsync(string ThingToAppend)
-        // {
-        //     StreamWriter file = new StreamWriter("Data.txt", append: true);
-        //     await file.WriteLineAsync(ThingToAppend);
-        //     //file.WriteLineAsync(ThingToAppend); 
-        //     file.Close();
-        // }
-
-        public static async void MyAsync(string ThingToAppend)
+        public static async void MyAsync(string ThingToAppend, string File)
         {
-            StreamWriter file = new StreamWriter("Data.txt", append: true);
+            StreamWriter file = new StreamWriter(File, append: true);
             await file.WriteLineAsync(ThingToAppend);
-            //file.WriteLineAsync(ThingToAppend); 
             file.Close();
         }
 
@@ -91,31 +116,6 @@ namespace WriteToFile
 
 
 
-
-
-
-
-        // void StartMessage()
-        // {
-        //     Console.WriteLine("Welcome to Login Manager!");
-        //     Console.WriteLine("Do you want to log into an existing account? (N for creating a new account.) Y/N");
-        //     Answer = Console.ReadLine();
-        // }
-
-        // void LoginOrCreate()
-        // {
-        //     while (Answer != "Y" || Answer != "N")
-        //     {
-        //         Console.WriteLine("[Please input a correct Value (Y or N). (Case sensitive)]");
-        //     }
-        //     if (Answer == "Y")
-        //     {
-        //         Console.WriteLine("You have logged in!");
-        //     }else if (Answer == "N")
-        //     {
-        //         Console.WriteLine("You have created a new account!");
-        //     }
-        // }
 
     }
 }
