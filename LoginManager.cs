@@ -1,22 +1,14 @@
 using System;
 using System.IO;
 using System.Threading.Tasks;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace WriteToFile
 {
     public class Variables
     {
         public int IndexOfName = 0;
-
-        // string UsernamesFile = "Usernames.txt";
-        // string PasswordsFile = "Passwords.txt";
-        // string NamesFile = "Names.txt";
-
-        // public string[] usernameArray = File.ReadAllLines(UsernamesFile);
-        // public string[] passwordArray = File.ReadAllLines(PasswordsFile);
-        // public string[] nameArray = File.ReadAllLines(NamesFile);
-
-
 
         public async void MyAsync(string ThingToAppend, string File)
         {
@@ -49,11 +41,7 @@ namespace WriteToFile
             Variables variables = new Variables();
             int indexOfName = variables.IndexOfName;
 
-            // string[] UsernameArray = variables.usernameArray;
-            // string[] PasswordArray = variables.passwordArray;
-            // string[] NameArray = variables.nameArray;
-
-            string UsernamesFile = "Usernames.txt";  //This got redone again, I know it's inefficient but I dont want to optimize my code rn.
+            string UsernamesFile = "Usernames.txt"; 
             string PasswordsFile = "Passwords.txt";
             string NamesFile = "Names.txt";
 
@@ -178,6 +166,13 @@ namespace WriteToFile
 
     public class Features
     {
+        // Variables variables = new Variables();
+        
+        // string[] UsernameArray = File.ReadAllLines("Usernames.txt"); //This got redone again, I know it's inefficient but I dont want to optimize my code rn.
+        // string[] PasswordArray = File.ReadAllLines("Passwords.txt");
+        // string[] NameArray = File.ReadAllLines("Names.txt");
+        int IndexOfName;
+        
         public void Choice()
         {
             Console.WriteLine("\n");
@@ -225,7 +220,17 @@ namespace WriteToFile
 
             if (Response == "Y")
             {
+                List<string> UsernameFile = File.ReadAllLines("Usernames.txt").ToList();
+                UsernameFile.RemoveAt(variables.IndexOfName);
+                File.WriteAllLines("Usernames.txt", UsernameFile.ToArray());
 
+                List<string> PasswordFile = File.ReadAllLines("Passwords.txt").ToList();
+                PasswordFile.RemoveAt(variables.IndexOfName);
+                File.WriteAllLines("Passwords.txt", PasswordFile.ToArray());
+
+                List<string> NameFile = File.ReadAllLines("Names.txt").ToList();
+                NameFile.RemoveAt(variables.IndexOfName);
+                File.WriteAllLines("Names.txt", NameFile.ToArray());
 
                 Console.WriteLine("Your account was deleted successfully.");
 
