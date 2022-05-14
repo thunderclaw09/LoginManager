@@ -46,12 +46,6 @@ namespace WriteToFile
             }
             if (Answer == "Y")
             {
-                // Console.WriteLine("You have logged in!");
-                //string[] lines = File.ReadAllLines("Data.txt");
-                // for(int i = 0; i < lines.Length; i++)
-                // {
-                //     Console.WriteLine(lines[i]);
-                // }
 
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your username:");
@@ -70,8 +64,6 @@ namespace WriteToFile
                     string line = UsernameArray[i];
                     if (Username == line)
                     {
-                        // Console.WriteLine("\n");
-                        // Console.WriteLine("You have a username entry!");
                         HasUsername = true;
                         IndexOfName = i;
                     }
@@ -79,16 +71,6 @@ namespace WriteToFile
 
                 if (HasUsername == true)
                 {
-                    // Console.WriteLine("You are now logged in! (No password yet.)");
-                    // for (int i = 0; i < PasswordArray.Length; i++)
-                    // {
-                    //     string line = PasswordArray[i];
-                    //     if (Password == line)
-                    //     {
-                    //         // Console.WriteLine("You have a password entry!");
-                    //         HasPassword = true;
-                    //     }
-                    // }
 
                     string line = PasswordArray[IndexOfName];
                     if (Password == line)
@@ -102,6 +84,10 @@ namespace WriteToFile
                         Console.WriteLine("You have successfully logged in!");
                         Name = NameArray[IndexOfName];
                         Console.WriteLine("Welcome, "+Name);
+
+                        Features features = new Features();
+                        features.Choice();
+
                     }else
                     {
                         Console.WriteLine("You have not put in a correct password.");
@@ -141,7 +127,7 @@ namespace WriteToFile
 
      
             Console.WriteLine("\n");
-            Console.WriteLine("Press Enter to continue...");
+            Console.WriteLine("Press Enter to exit...");
             Console.ReadKey();
 
             
@@ -154,10 +140,16 @@ namespace WriteToFile
             file.Close();
         }
 
+    }
 
-
-
-
-
+    public class Features
+    {
+        public void Choice()
+        {
+            Console.WriteLine("\n");
+            Console.WriteLine("=============================================");
+            Console.WriteLine("What would you like to do?");
+        }
+        
     }
 }
