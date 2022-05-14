@@ -7,6 +7,13 @@ namespace WriteToFile
     public class Variables
     {
         public int IndexOfName = 0;
+
+        public async void MyAsync(string ThingToAppend, string File)
+        {
+            StreamWriter file = new StreamWriter(File, append: true);
+            await file.WriteLineAsync(ThingToAppend);
+            file.Close();
+        }
     }
     
     public class Program
@@ -33,6 +40,7 @@ namespace WriteToFile
 
             Variables variables = new Variables();
             int indexOfName = variables.IndexOfName;
+
 
 
 
@@ -113,17 +121,17 @@ namespace WriteToFile
 
                 Console.WriteLine("Please input your new username: ");
                 NewUsername = Console.ReadLine();
-                MyAsync(NewUsername, UsernamesFile);
+                variables.MyAsync(NewUsername, UsernamesFile);
                 
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your new password: ");
                 NewPassword = Console.ReadLine();
-                MyAsync(NewPassword, PasswordsFile);
+                variables.MyAsync(NewPassword, PasswordsFile);
 
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your name: ");
                 NewName = Console.ReadLine();
-                MyAsync(NewName, NamesFile);
+                variables.MyAsync(NewName, NamesFile);
 
                 Console.WriteLine("\n");
                 Console.WriteLine("You have successfully created an account. Restart the console to be able to log in!");
@@ -138,14 +146,16 @@ namespace WriteToFile
             
         }
 
-        public static async void MyAsync(string ThingToAppend, string File)
-        {
-            StreamWriter file = new StreamWriter(File, append: true);
-            await file.WriteLineAsync(ThingToAppend);
-            file.Close();
-        }
+        
 
     }
+
+
+
+
+
+
+
 
     public class Features
     {
@@ -196,6 +206,7 @@ namespace WriteToFile
 
             if (Response == "Y")
             {
+                
                 
                 Console.WriteLine("Your account was deleted successfully.");
 
