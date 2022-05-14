@@ -8,17 +8,29 @@ namespace WriteToFile
     {
         public int IndexOfName = 0;
 
+        // string UsernamesFile = "Usernames.txt";
+        // string PasswordsFile = "Passwords.txt";
+        // string NamesFile = "Names.txt";
+
+        // public string[] usernameArray = File.ReadAllLines(UsernamesFile);
+        // public string[] passwordArray = File.ReadAllLines(PasswordsFile);
+        // public string[] nameArray = File.ReadAllLines(NamesFile);
+
+
+
         public async void MyAsync(string ThingToAppend, string File)
         {
             StreamWriter file = new StreamWriter(File, append: true);
             await file.WriteLineAsync(ThingToAppend);
             file.Close();
         }
+
+
     }
-    
+
     public class Program
     {
-        
+
         public static void Main(string[] args)
         {
 
@@ -31,15 +43,25 @@ namespace WriteToFile
             string Password;
             string Name;
 
-            string UsernamesFile = "Usernames.txt";
-            string PasswordsFile = "Passwords.txt";
-            string NamesFile = "Names.txt";
-
             bool HasUsername = false;
             bool HasPassword = false;
 
             Variables variables = new Variables();
             int indexOfName = variables.IndexOfName;
+
+            // string[] UsernameArray = variables.usernameArray;
+            // string[] PasswordArray = variables.passwordArray;
+            // string[] NameArray = variables.nameArray;
+
+            string UsernamesFile = "Usernames.txt";  //This got redone again, I know it's inefficient but I dont want to optimize my code rn.
+            string PasswordsFile = "Passwords.txt";
+            string NamesFile = "Names.txt";
+
+            string[] UsernameArray = File.ReadAllLines(UsernamesFile);
+            string[] PasswordArray = File.ReadAllLines(PasswordsFile);
+            string[] NameArray = File.ReadAllLines(NamesFile);
+
+
 
 
 
@@ -63,14 +85,11 @@ namespace WriteToFile
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your username:");
                 Username = Console.ReadLine();
-                
+
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your password:");
                 Password = Console.ReadLine();
 
-                string[] UsernameArray = File.ReadAllLines(UsernamesFile);
-                string[] PasswordArray = File.ReadAllLines(PasswordsFile);
-                string[] NameArray = File.ReadAllLines(NamesFile);
 
                 for (int i = 0; i < UsernameArray.Length; i++)
                 {
@@ -105,7 +124,7 @@ namespace WriteToFile
                     {
                         Console.WriteLine("You have not put in a correct password.");
                     }
-                    
+
                 }else
                 {
                     Console.WriteLine("You either do not have an account yet or you didn't put in your username correctly.");
@@ -122,7 +141,7 @@ namespace WriteToFile
                 Console.WriteLine("Please input your new username: ");
                 NewUsername = Console.ReadLine();
                 variables.MyAsync(NewUsername, UsernamesFile);
-                
+
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your new password: ");
                 NewPassword = Console.ReadLine();
@@ -135,18 +154,18 @@ namespace WriteToFile
 
                 Console.WriteLine("\n");
                 Console.WriteLine("You have successfully created an account. Restart the console to be able to log in!");
-                
+
             }
 
-     
+
             Console.WriteLine("\n");
             Console.WriteLine("Press Enter to exit...");
             Console.ReadKey();
 
-            
+
         }
 
-        
+
 
     }
 
@@ -195,8 +214,8 @@ namespace WriteToFile
                 //No code goes here. This makes it exit.
             }
 
-                
-            
+
+
         }
 
         public void DeleteAccount()
@@ -206,8 +225,8 @@ namespace WriteToFile
 
             if (Response == "Y")
             {
-                
-                
+
+
                 Console.WriteLine("Your account was deleted successfully.");
 
             }else if (Response == "N")
@@ -221,6 +240,6 @@ namespace WriteToFile
         {
             Console.WriteLine("Your name was changed successfully.");
         }
-        
+
     }
 }
