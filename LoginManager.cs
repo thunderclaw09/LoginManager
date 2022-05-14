@@ -80,14 +80,20 @@ namespace WriteToFile
                 if (HasUsername == true)
                 {
                     // Console.WriteLine("You are now logged in! (No password yet.)");
-                    for (int i = 0; i < PasswordArray.Length; i++)
+                    // for (int i = 0; i < PasswordArray.Length; i++)
+                    // {
+                    //     string line = PasswordArray[i];
+                    //     if (Password == line)
+                    //     {
+                    //         // Console.WriteLine("You have a password entry!");
+                    //         HasPassword = true;
+                    //     }
+                    // }
+
+                    string line = PasswordArray[IndexOfName];
+                    if (Password == line)
                     {
-                        string line = PasswordArray[i];
-                        if (Password == line)
-                        {
-                            // Console.WriteLine("You have a password entry!");
-                            HasPassword = true;
-                        }
+                        HasPassword = true;
                     }
 
                     if (HasPassword == true)
