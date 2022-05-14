@@ -163,8 +163,6 @@ namespace WriteToFile
             Console.WriteLine("3 Exit out of Session.");
 
             string ans = Console.ReadLine();
-            // string[] ValidInt = ["1", "2"];
-            // bool IsCorrectChoice = false;
 
             while (ans != "1" && ans != "2" && ans!="3")
             {
@@ -184,27 +182,8 @@ namespace WriteToFile
                 Choice();
             }else if (ans == "3")
             {
-                // Console.WriteLine("Press enter to exit.");           //THIS CODE MAKES YOU PRESS ENTER TWICE, SINCE THIS IS RUN AND THEN THE EXIT CODE IS RUN ALSO IN THE MAIN FUNCTION.
-                // Console.ReadKey();
-
-                //No code goes here. This should make it exit.
+                //No code goes here. This makes it exit.
             }
-
-            
-            // }else{
-            //     Console.WriteLine("Please put in a valid integer.");
-            //     while (IsCorrectChoice == false)
-            //     {
-            //         ans = Console.ReadLine();
-
-            //         for (int i = 0; i < ValidInt.Length; i++)
-            //         {
-            //             if (ans == ValidInt[i])
-            //             {
-            //                 IsCorrectChoice = true;
-            //             }
-            //         }
-            //     }
 
                 
             
