@@ -6,8 +6,30 @@ using System.Linq;
 
 namespace WriteToFile
 {
-    public class Variables
+    public class WriteToFileClass
     {
+        string Answer;
+        string NewUsername;
+        string NewPassword;
+        string NewName;
+
+        string Username;
+        string Password;
+        string Name;
+
+        bool HasUsername = false;
+        bool HasPassword = false;
+
+        static string UsernamesFile = "Usernames.txt"; 
+        static string PasswordsFile = "Passwords.txt";
+        static string NamesFile = "Names.txt";
+
+        string[] UsernameArray = File.ReadAllLines(UsernamesFile);
+        string[] PasswordArray = File.ReadAllLines(PasswordsFile);
+        string[] NameArray = File.ReadAllLines(NamesFile);
+
+        public int indexOfName;
+
         public async void MyAsync(string ThingToAppend, string File)
         {
             StreamWriter file = new StreamWriter(File, append: true);
@@ -15,45 +37,8 @@ namespace WriteToFile
             file.Close();
         }
 
-
-    }
-
-    public class Program
-    {
-
-        public static void Main(string[] args)
+        public void TheProgram()
         {
-
-            string Answer;
-            string NewUsername;
-            string NewPassword;
-            string NewName;
-
-            string Username;
-            string Password;
-            string Name;
-
-            bool HasUsername = false;
-            bool HasPassword = false;
-
-            Variables variables = new Variables();
-
-            string UsernamesFile = "Usernames.txt"; 
-            string PasswordsFile = "Passwords.txt";
-            string NamesFile = "Names.txt";
-
-            string[] UsernameArray = File.ReadAllLines(UsernamesFile);
-            string[] PasswordArray = File.ReadAllLines(PasswordsFile);
-            string[] NameArray = File.ReadAllLines(NamesFile);
-
-            Features features = new Features();
-            int indexOfName = features.IndexOfName;
-
-
-
-
-
-
             //START THE MESSAGE
             Console.WriteLine("Welcome to Login Manager!");
             Console.WriteLine("Do you want to log into an existing account? (N for creating a new account.) Y/N");
@@ -105,7 +90,7 @@ namespace WriteToFile
                         Name = NameArray[indexOfName];
                         Console.WriteLine("Welcome, "+Name);
 
-                        features.Choice();
+                        Choice();
 
                     }else
                     {
@@ -127,17 +112,17 @@ namespace WriteToFile
 
                 Console.WriteLine("Please input your new username: ");
                 NewUsername = Console.ReadLine();
-                variables.MyAsync(NewUsername, UsernamesFile);
+                MyAsync(NewUsername, UsernamesFile);
 
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your new password: ");
                 NewPassword = Console.ReadLine();
-                variables.MyAsync(NewPassword, PasswordsFile);
+                MyAsync(NewPassword, PasswordsFile);
 
                 Console.WriteLine("\n");
                 Console.WriteLine("Please input your name: ");
                 NewName = Console.ReadLine();
-                variables.MyAsync(NewName, NamesFile);
+                MyAsync(NewName, NamesFile);
 
                 Console.WriteLine("\n");
                 Console.WriteLine("You have successfully created an account. Restart the console to be able to log in!");
@@ -145,29 +130,8 @@ namespace WriteToFile
             }
 
 
-            Console.WriteLine("\n");
-            Console.WriteLine("Press Enter to exit...");
-            Console.ReadKey();
-
-
         }
-
-
-
-    }
-
-
-
-
-
-
-
-
-    public class Features
-    {
-        public int IndexOfName;
-        
-        public void Choice()
+        void Choice()
         {
             Console.WriteLine("\n");
             Console.WriteLine("\n");
@@ -207,24 +171,24 @@ namespace WriteToFile
 
         }
 
-        public void DeleteAccount()
+        void DeleteAccount()
         {
             Console.WriteLine("Are you sure you want to delete your account? Y/N");
             string Response = Console.ReadLine();
 
             if (Response == "Y")
             {
-                List<string> UsernameFile = File.ReadAllLines("Usernames.txt").ToList();
-                UsernameFile.RemoveAt(IndexOfName);
-                File.WriteAllLines("Usernames.txt", UsernameFile.ToArray());
+                List<string> Username_file = File.ReadAllLines(UsernamesFile).ToList();
+                Username_file.RemoveAt(indexOfName);
+                File.WriteAllLines(UsernamesFile, Username_file.ToArray());
 
-                List<string> PasswordFile = File.ReadAllLines("Passwords.txt").ToList();
-                PasswordFile.RemoveAt(IndexOfName);
-                File.WriteAllLines("Passwords.txt", PasswordFile.ToArray());
+                List<string> Password_file = File.ReadAllLines(PasswordsFile).ToList();
+                Password_file.RemoveAt(indexOfName);
+                File.WriteAllLines(PasswordsFile, Password_file.ToArray());
 
-                List<string> NameFile = File.ReadAllLines("Names.txt").ToList();
-                NameFile.RemoveAt(IndexOfName);
-                File.WriteAllLines("Names.txt", NameFile.ToArray());
+                List<string> Name_file = File.ReadAllLines(NamesFile).ToList();
+                Name_file.RemoveAt(indexOfName);
+                File.WriteAllLines(NamesFile, Name_file.ToArray());
 
                 Console.WriteLine("Your account was deleted successfully.");
 
@@ -235,10 +199,34 @@ namespace WriteToFile
             }
         }
 
-        public void ChangeName()
+        void ChangeName()
         {
             Console.WriteLine("Your name was changed successfully.");
         }
+        
+
+        
+    }
+
+
+    public class Program
+    {
+        static WriteToFileClass writeToFile = new WriteToFileClass();
+
+        public static void Main(string[] args)
+        {
+            writeToFile.TheProgram();
+
+            Console.WriteLine("\n");
+            Console.WriteLine("Press Enter to exit...");
+            Console.ReadKey();
+
+
+        }
+
+
 
     }
+
+
 }
