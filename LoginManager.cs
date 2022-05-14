@@ -4,6 +4,10 @@ using System.Threading.Tasks;
 
 namespace WriteToFile
 {
+    public class Variables
+    {
+        public int IndexOfName = 0;
+    }
     
     public class Program
     {
@@ -27,7 +31,8 @@ namespace WriteToFile
             bool HasUsername = false;
             bool HasPassword = false;
 
-            int IndexOfName = 0;
+            Variables variables = new Variables();
+            int indexOfName = variables.IndexOfName;
 
 
 
@@ -65,14 +70,14 @@ namespace WriteToFile
                     if (Username == line)
                     {
                         HasUsername = true;
-                        IndexOfName = i;
+                        indexOfName = i;
                     }
                 }
 
                 if (HasUsername == true)
                 {
 
-                    string line = PasswordArray[IndexOfName];
+                    string line = PasswordArray[indexOfName];
                     if (Password == line)
                     {
                         HasPassword = true;
@@ -82,7 +87,7 @@ namespace WriteToFile
                     {
                         Console.WriteLine("\n");
                         Console.WriteLine("You have successfully logged in!");
-                        Name = NameArray[IndexOfName];
+                        Name = NameArray[indexOfName];
                         Console.WriteLine("Welcome, "+Name);
 
                         Features features = new Features();
@@ -147,8 +152,84 @@ namespace WriteToFile
         public void Choice()
         {
             Console.WriteLine("\n");
+            Console.WriteLine("\n");
+            Console.WriteLine("=============================================");
             Console.WriteLine("=============================================");
             Console.WriteLine("What would you like to do?");
+            Console.WriteLine("Here are your choices:");
+
+            Console.WriteLine("\n1 Delete your account.");
+            Console.WriteLine("2 Change your name.");
+            Console.WriteLine("3 Exit out of Session.");
+
+            string ans = Console.ReadLine();
+            // string[] ValidInt = ["1", "2"];
+            // bool IsCorrectChoice = false;
+
+            while (ans != "1" && ans != "2" && ans!="3")
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("Please put in a correct integer.");
+                ans = Console.ReadLine();
+            }
+
+            if (ans == "1")
+            {
+                Console.WriteLine("---------------------------------------------");
+                DeleteAccount();
+            }else if (ans == "2")
+            {
+                Console.WriteLine("---------------------------------------------");
+                ChangeName();
+                Choice();
+            }else if (ans == "3")
+            {
+                // Console.WriteLine("Press enter to exit.");           //THIS CODE MAKES YOU PRESS ENTER TWICE, SINCE THIS IS RUN AND THEN THE EXIT CODE IS RUN ALSO IN THE MAIN FUNCTION.
+                // Console.ReadKey();
+
+                //No code goes here. This should make it exit.
+            }
+
+            
+            // }else{
+            //     Console.WriteLine("Please put in a valid integer.");
+            //     while (IsCorrectChoice == false)
+            //     {
+            //         ans = Console.ReadLine();
+
+            //         for (int i = 0; i < ValidInt.Length; i++)
+            //         {
+            //             if (ans == ValidInt[i])
+            //             {
+            //                 IsCorrectChoice = true;
+            //             }
+            //         }
+            //     }
+
+                
+            
+        }
+
+        public void DeleteAccount()
+        {
+            Console.WriteLine("Are you sure you want to delete your account? Y/N");
+            string Response = Console.ReadLine();
+
+            if (Response == "Y")
+            {
+                
+                Console.WriteLine("Your account was deleted successfully.");
+
+            }else if (Response == "N")
+            {
+                Console.WriteLine("Ok. Exiting out of session.");
+                Choice();
+            }
+        }
+
+        public void ChangeName()
+        {
+            Console.WriteLine("Your name was changed successfully.");
         }
         
     }
