@@ -202,10 +202,43 @@ namespace WriteToFile
             }
         }
 
+
+
+
+
         void ChangeName()
         {
-            Console.WriteLine("Your name was changed successfully.");
+            Console.WriteLine("Are you sure you want to change your name? Y/N");
+            string Response = Console.ReadLine();
+
+            if (Response == "Y")
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("What do you want your new name to be?");
+                string TheNewName = Console.ReadLine();
+
+                List<string> Name_file = File.ReadAllLines(NamesFile).ToList();
+                Name_file.RemoveAt(indexOfName);
+                // NamesFile[indexOfName] = TheNewName;
+                Name_file.Insert(indexOfName, TheNewName);
+                File.WriteAllLines(NamesFile, Name_file.ToArray());
+
+                ///THIS WAS JUST TO TEST:
+                // Console.WriteLine("The list now:");
+                // for (int i = 0; i<Name_file.Count(); i++)
+                // {
+                //     Console.Write(Name_file[i]);
+                // }
+
+                Console.WriteLine("Your name was changed successfully.");
+
+            }else if (Response == "N")
+            {
+                Console.WriteLine("Ok. Exiting out of session.");
+                Choice();
+            }
         }
+        
         
 
         
