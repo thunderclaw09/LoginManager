@@ -145,11 +145,13 @@ namespace WriteToFile
 
             Console.WriteLine("\n1 Delete your account.");
             Console.WriteLine("2 Change your name.");
-            Console.WriteLine("3 Exit out of Session.");
+            Console.WriteLine("3 Change your username.");
+            Console.WriteLine("4 Change your password.");
+            Console.WriteLine("5 Exit out of Session.");
 
             string ans = Console.ReadLine();
 
-            while (ans != "1" && ans != "2" && ans!="3")
+            while (ans != "1" && ans != "2" && ans!="3" && ans!="4" && ans!="5")
             {
                 Console.WriteLine("\n");
                 Console.WriteLine("Please put in a correct integer.");
@@ -166,6 +168,16 @@ namespace WriteToFile
                 ChangeName();
                 Choice();
             }else if (ans == "3")
+            {
+                Console.WriteLine("---------------------------------------------");
+                ChangeUsername();
+                Choice();
+            }else if (ans == "4")
+            {
+                Console.WriteLine("---------------------------------------------");
+                ChangePassword();
+                Choice();
+            }else if (ans == "5")
             {
                 //No code goes here. This makes it exit.
             }
@@ -203,9 +215,6 @@ namespace WriteToFile
         }
 
 
-
-
-
         void ChangeName()
         {
             Console.WriteLine("Are you sure you want to change your name? Y/N");
@@ -219,18 +228,59 @@ namespace WriteToFile
 
                 List<string> Name_file = File.ReadAllLines(NamesFile).ToList();
                 Name_file.RemoveAt(indexOfName);
-                // NamesFile[indexOfName] = TheNewName;
                 Name_file.Insert(indexOfName, TheNewName);
                 File.WriteAllLines(NamesFile, Name_file.ToArray());
-
-                ///THIS WAS JUST TO TEST:
-                // Console.WriteLine("The list now:");
-                // for (int i = 0; i<Name_file.Count(); i++)
-                // {
-                //     Console.Write(Name_file[i]);
-                // }
-
                 Console.WriteLine("Your name was changed successfully.");
+
+            }else if (Response == "N")
+            {
+                Console.WriteLine("Ok. Exiting out of session.");
+                Choice();
+            }
+        }
+
+
+        void ChangeUsername()
+        {
+            Console.WriteLine("Are you sure you want to change your username? Y/N");
+            string Response = Console.ReadLine();
+
+            if (Response == "Y")
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("What do you want your new username to be?");
+                string TheNewName = Console.ReadLine();
+
+                List<string> Name_file = File.ReadAllLines(UsernamesFile).ToList();
+                Name_file.RemoveAt(indexOfName);
+                Name_file.Insert(indexOfName, TheNewName);
+                File.WriteAllLines(UsernamesFile, Name_file.ToArray());
+                Console.WriteLine("Your username was changed successfully.");
+
+            }else if (Response == "N")
+            {
+                Console.WriteLine("Ok. Exiting out of session.");
+                Choice();
+            }
+        }
+
+
+        void ChangePassword()
+        {
+            Console.WriteLine("Are you sure you want to change your password? Y/N");
+            string Response = Console.ReadLine();
+
+            if (Response == "Y")
+            {
+                Console.WriteLine("\n");
+                Console.WriteLine("What do you want your new password to be?");
+                string TheNewName = Console.ReadLine();
+
+                List<string> Name_file = File.ReadAllLines(PasswordsFile).ToList();
+                Name_file.RemoveAt(indexOfName);
+                Name_file.Insert(indexOfName, TheNewName);
+                File.WriteAllLines(PasswordsFile, Name_file.ToArray());
+                Console.WriteLine("Your password was changed successfully.");
 
             }else if (Response == "N")
             {
